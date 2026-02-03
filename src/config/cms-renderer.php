@@ -3,7 +3,7 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | CMS Renderer Configuration
+    | CMS Renderer Configurations
     |--------------------------------------------------------------------------
     |
     | Configure your Global CMS integration settings here.
