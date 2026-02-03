@@ -76,6 +76,9 @@ class InstallCommand extends Command
             '--tag' => 'cms-renderer-views',
             '--force' => true,
         ]);
+        
+        // Explicitly copy blog pages to resources/views/blog so the Controller can find them
+        $this->copyBlogViews();
         $this->info('✔ Published views');
 
         // 3. Create controller
@@ -242,6 +245,18 @@ ENV;
         }
 
         File::put($envPath, $envContent);
+    }
+
+    /**
+     * Copy blog views to resources/views/blog
+     */
+    protected function copyBlogViews(): void
+    {
+        $source = __DIR__ . '/../../resources/views/blog';
+        $destination = resource_path('views/blog');
+
+        File::ensureDirectoryExists($destination);
+        File::copyDirectory($source, $destination);
     }
 
     /**
