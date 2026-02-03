@@ -10,7 +10,7 @@
             "email": "talha@techozon.com"
         }
     ],
-    "homepage": "https://github.com/talhakazmi/cms-renderer-laravel",
+    "homepage": "https://github.com/TalhaKazmi1/cms-renderer-laravel",
     "require": {
         "php": "^8.1",
         "illuminate/support": "^10.0|^11.0",
