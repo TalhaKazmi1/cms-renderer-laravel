@@ -235,6 +235,12 @@ ENV;
             $this->warn('Changed SESSION_DRIVER from database to file (to avoid SQLite driver issues)');
         }
 
+        // Also ensure CACHE_STORE=file to avoid SQLite issues
+        if (str_contains($envContent, 'CACHE_STORE=database')) {
+            $envContent = str_replace('CACHE_STORE=database', 'CACHE_STORE=file', $envContent);
+            $this->warn('Changed CACHE_STORE from database to file (to avoid SQLite driver issues)');
+        }
+
         File::put($envPath, $envContent);
     }
 

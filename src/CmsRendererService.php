@@ -36,10 +36,17 @@ class CmsRendererService
                 $query['search'] = $search;
             }
 
-            $response = Http::get("{$this->apiUrl}/public/blogs", $query);
+            try {
+                $response = Http::withoutVerifying()
+                    ->timeout(10)
+                    ->get("{$this->apiUrl}/public/blogs", $query);
 
-            if ($response->successful()) {
-                return $response->json();
+                if ($response->successful()) {
+                    return $response->json();
+                }
+            } catch (\Exception $e) {
+                // Log error but don't break the app
+                \Log::warning('CMS Renderer API Error: ' . $e->getMessage());
             }
 
             return [
@@ -62,12 +69,18 @@ class CmsRendererService
         $cacheKey = "cms_blog_{$this->organizationId}_{$slug}";
 
         return Cache::remember($cacheKey, $this->cacheDuration, function () use ($slug) {
-            $response = Http::get("{$this->apiUrl}/public/blogs/{$slug}", [
-                'organizationId' => $this->organizationId,
-            ]);
+            try {
+                $response = Http::withoutVerifying()
+                    ->timeout(10)
+                    ->get("{$this->apiUrl}/public/blogs/{$slug}", [
+                        'organizationId' => $this->organizationId,
+                    ]);
 
-            if ($response->successful()) {
-                return $response->json();
+                if ($response->successful()) {
+                    return $response->json();
+                }
+            } catch (\Exception $e) {
+                \Log::warning('CMS Renderer API Error: ' . $e->getMessage());
             }
 
             return null;
