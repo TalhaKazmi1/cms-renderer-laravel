@@ -18,11 +18,20 @@ A **Laravel Blog Renderer** that displays blogs from [Global CMS](https://blogcm
 
 ---
 
-## 📋 Requirements
+## 📋 Prerequisites
 
+Before installing the package, ensure you have:
 - PHP 8.1 or higher
-- Laravel 10.x or 11.x
+- Composer installed
 - An account at [Global CMS](https://blogcms.techozon.com)
+
+### Create a New Laravel Project (Optional)
+If you don't have a Laravel project yet, create one:
+
+```bash
+composer create-project laravel/laravel my-blog
+cd my-blog
+```
 
 ---
 
